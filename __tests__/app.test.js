@@ -67,6 +67,34 @@ describe('app routes', () => {
 
   it('updates a recipe by id', async() => {
     const recipe = await Recipe.create({
+      name: 'good cookies',
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ],
+    });
+
+    return request(app)
+      .patch(`/api/v1/recipes/${recipe._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: recipe._id.toString(),
+          name: 'good cookies',
+          directions: [
+            'preheat oven to 375',
+            'mix ingredients',
+            'put dough on cookie sheet',
+            'bake for 10 minutes'
+          ],
+          __v: 0
+        });
+      });
+  });
+
+  it('gets one recipe by ID', async() => {
+    const recipe = await Recipe.create({
       name: 'cookies',
       directions: [
         'preheat oven to 375',
@@ -78,11 +106,11 @@ describe('app routes', () => {
 
     return request(app)
       .patch(`/api/v1/recipes/${recipe._id}`)
-      .send({ name: 'good cookies' })
+      .send({ name: 'cookies' })
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          name: 'good cookies',
+          name: 'cookies',
           directions: [
             'preheat oven to 375',
             'mix ingredients',
