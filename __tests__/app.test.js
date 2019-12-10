@@ -24,6 +24,7 @@ describe('app routes', () => {
       .post('/api/v1/recipes')
       .send({
         name: 'cookies',
+        ingredients: [{ name: 'butter', amount: 1, measurement: 'C' }],
         directions: [
           'preheat oven to 375',
           'mix ingredients',
@@ -35,6 +36,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           name: 'cookies',
+          ingredients: [{ _id: expect.any(String), name: 'butter', amount: 1, measurement: 'C' }],
           directions: [
             'preheat oven to 375',
             'mix ingredients',
@@ -68,6 +70,7 @@ describe('app routes', () => {
   it('updates a recipe by id', async() => {
     const recipe = await Recipe.create({
       name: 'good cookies',
+      ingredients: [{ name: 'butter', amount: 1, measurement: 'C' }],
       directions: [
         'preheat oven to 375',
         'mix ingredients',
@@ -82,6 +85,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: recipe._id.toString(),
           name: 'good cookies',
+          ingredients: [{ _id: expect.any(String), name: 'butter', amount: 1, measurement: 'C' }],
           directions: [
             'preheat oven to 375',
             'mix ingredients',
@@ -96,6 +100,7 @@ describe('app routes', () => {
   it('gets one recipe by ID', async() => {
     const recipe = await Recipe.create({
       name: 'cookies',
+      ingredients: [{ name: 'butter', amount: 1, measurement: 'C' }],
       directions: [
         'preheat oven to 375',
         'mix ingredients',
@@ -111,6 +116,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           name: 'cookies',
+          ingredients: [{ _id: expect.any(String), name: 'butter', amount: 1, measurement: 'C' }],
           directions: [
             'preheat oven to 375',
             'mix ingredients',
@@ -119,17 +125,13 @@ describe('app routes', () => {
           ],
           __v: 0
         });
-
-
-
       });
-
-
   });
 
   it('Delete a recipe by ID', async() => {
     const recipe = await Recipe.create({
       name: 'cookies',
+      ingredients: [{ name: 'butter', amount: 1, measurement: 'C' }],
       directions: [
         'preheat oven to 375',
         'mix ingredients',
@@ -143,6 +145,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: recipe._id.toString(),
           name: 'cookies',
+          ingredients: [{ _id: expect.any(String), name: 'butter', amount: 1, measurement: 'C' }],
           directions: [
             'preheat oven to 375',
             'mix ingredients',
